@@ -14,16 +14,15 @@
   | Confluence |7.19.20 | https://www.atlassian.com/software/confluence/download-archives |
   | 系统| ubuntu-20.04.6-live-server-amd64 | https://ubuntu.com/download/server#downloads|
 
-##安装系统
+## 安装系统
   创建虚拟机
   安装Ubantu
 
-##Ubuntu基础配置
+## Ubuntu基础配置
 1 - 修改Root可以远程登录
-​```python
-def hello():
-    print("Hello, world!")
-hello()
+
+​```bash
+sudo passwd root
 ​```
 
 
