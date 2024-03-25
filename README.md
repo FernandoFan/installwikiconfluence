@@ -123,12 +123,111 @@ mysql --version
 sudo service mysql status
 ```
 
+#### 配置数据库
+参考网址：https://confluence.atlassian.com/conf719/database-setup-for-mysql-1157467559.html
+
+```bash
+#打开配置文件目录
+cd /etc/mysql/my.cnf
+
+#编辑配置文件
+my.cnf
+
+#添加以下代码到配置文件
+[mysqld]
+character-set-server=utf8mb4
+collation-server=utf8mb4_bin
+default-storage-engine=INNODB
+max_allowed_packet=256M
+innodb_log_file_size=2GB
+transaction-isolation=READ-COMMITTED
+binlog_format=row
+log_bin_trust_function_creators = 1  
+
+#重启数据库
+sudo service mysql restart
+```
 
 
+```bash
+#配置数据库
+#进入数据库
+mysql -u root -p
 
+#创建数据库
+CREATE DATABASE confluence CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
+#创建用户
+CREATE USER 'confluenceuser'@'localhost' IDENTIFIED BY 'Qwer1234';
 
+#给用户权限
+GRANT ALL PRIVILEGES ON confluence.* TO 'confluenceuser'@'localhost';
 
+#退出
+exit
 
+#重启数据库
+sudo systemctl restart mysql
 
+#查看状态
+sudo service mysql status
+```
 
+#### 安装confluence
+把atlassian-confluence-7.19.20-x64.bin 拷贝到 /mnt
+
+```bash
+#执行这个命令后，所有用户（包括文件所有者、文件所属组和其他用户）都会对这个文件拥有执行权限。
+chmod a+x atlassian-confluence-7.19.20-x64.bin
+
+#开始安装
+sudo ./atlassian-confluence-7.19.20-x64.bin
+
+#查看confluence 运行状态
+ps aux | grep confluence
+```
+
+#### 安装数据库驱动
+把数据库驱动复制到mnt
+```bash
+#安装解压软件
+sudo apt install alien
+
+#解压
+sudo alien -i -d mysql-connector-java_8.0.22-1ubuntu20.04_all.deb
+
+#执行命令移动解压出来的文件
+sudo cp /usr/share/java/mysql-connector-java-8.0.22.jar /opt/atlassian/confluence/confluence/WEB-INF/lib
+```
+
+#### 安装代理软件
+代理软件地址：https://github.com/haxqer/confluence
+把文件放到/opt/atlassian/agent/
+打开：/opt/atlassian/confluence/bin/setenv.sh
+
+```bash
+#插到这个setenv.sh文件的最后部分，export CATALINA_OPTS 的上面 
+CATALINA_OPTS="-javaagent:/opt/atlassian/agent/atlassian-agent.jar ${CATALINA_OPTS}"
+
+#重启
+confluence：sudo /etc/init.d/confluence restart
+
+#验证是否启动成功
+ps aux | grep javaagent
+
+#获取秘钥
+java -jar /opt/atlassian/agent/atlassian-agent.jar  -p conf -m  12345678@qq.com -n confluence1 -o confluence2 -s BQK1-NYKM-0CGT-V5KR(你的SN序列号)
+
+#破解插件
+java -jar /opt/atlassian/agent/atlassian-agent.jar  -p com.stiltsoft.confluence.smart-attachment-for-confluence -m  12345678@qq.com -n confluence1 -o confluence2 -s B18L-VALX-ETN1-20QQ(你的SN序列号)
+```
+
+#### 连接数据库Enjoy
+  | 项目   | 参数   |
+  |-------|-------|
+  |主机名|localhost|
+  |端口|3306|
+  |数据库名称|confluence|
+  |用户名|confluenceuser|
+  |密码|Qwer1234|
+ 
