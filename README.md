@@ -16,7 +16,8 @@
   | Confluence |7.19.20 | https://www.atlassian.com/software/confluence/download-archives |
   | 系统| ubuntu-20.04.6-live-server-amd64 | https://ubuntu.com/download/server#downloads|
   |SSH远程控制软件|FinalShell| https://www.hostbuf.com/t/988.html|
-  |SQL|-------|-------|
+  |MySQL|mysql-server_8.0.22-1ubuntu20.04_amd64.deb-bundle.tar|https://downloads.mysql.com/archives/community|
+  |MySQL 驱动|mysql-connector-java_8.0.22-1ubuntu20.04_all.deb|https://downloads.mysql.com/archives/c-j|
   
 ## 安装系统
 
@@ -121,6 +122,7 @@ mysql --version
 #查看运行状态
 sudo service mysql status
 ```
+
 
 
 
