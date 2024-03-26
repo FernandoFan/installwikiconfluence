@@ -237,7 +237,7 @@ sudo cp /usr/share/java/mysql-connector-java-8.0.22.jar /opt/atlassian/confluenc
 CATALINA_OPTS="-javaagent:/opt/atlassian/agent/atlassian-agent.jar ${CATALINA_OPTS}"
 
 #重启
-confluence：sudo /etc/init.d/confluence restart
+sudo /etc/init.d/confluence restart
 
 #验证是否启动成功
 ps aux | grep javaagent
