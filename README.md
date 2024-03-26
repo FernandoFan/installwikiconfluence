@@ -20,13 +20,40 @@
   |MySQL 驱动|mysql-connector-java_8.0.22-1ubuntu20.04_all.deb|https://downloads.mysql.com/archives/c-j|
   
 ## 安装系统
-
-  创建虚拟机
-  安装Ubantu
+创建虚拟机
+### 安装Ubantu
+#### Network connections 选择修改网卡地址
+    选择网卡端口 > Edit IPV4 > 改成Manual
+     subnet：192.168.1.0/24（根据你实际的网段来设置）
+     address:192.168.1.108 (你希望这个服务器的地址)
+     Gateway：192.168.1.1 （你的网关路由器地址）
+     Name server：192.168.1.1（一般和你路由器一样，如果有特别制定你用英文逗号隔开）
+#### Configure ubuntu archive mirror 镜像地址修改成国内的
+    Mirror address：把us.archive.ubuntu.com/ubuntu 改成 cn.archive.ubuntu.com/ubuntu
+#### Guided Storage configuration 修改空间分配
+     移动选项到Custom storage layout 然后空格选中 > 选择Done
+     1 设置boot分区：选择free speace > add gpt partition > size: 输入500m > format：xfs > mount /boot > create
+     boot引导分区通常用于存放引导加载程序和相关的引导文件
+     
+     2 设置swap分区：选择free speace > add gpt partition > size:8G(内存的两倍) > create
+     Swap 分区用于当物理内存不足时，作为虚拟内存的一部分，用于交换出内存中暂时不活跃的数据
+     
+     创建root分区：选择free speace > add gpt partition > size:留空把剩余空间都给他> format：xfs > mount / > create
+    Done > Continue
+#### Profile setup 账号设置
+     创建具有sudo权限的用户，用来登录系统
+     新装Ubuntu在完成后是无法使用root直接登录系统，需要使用这个用户来登录系统，然后自行设置root密码。
+#### SSH setup 
+    选择install openshh server，我们之后需要这个来远程管理服务器
+#### 开始安装
+    这个时候在下载安全更新，这里建议等待，如果不愿意等待你就直接重启即可
+    看到这一行就完成了 ： finish：cmd-in-target：SUCCESS
+    重启服务器：Reboot now
+    删除掉CDROM
 
 ## Ubuntu基础配置
 #### 1 - 修改Root可以远程登录
-
+        
 ```bash
 sudo passwd root
 ```
@@ -44,7 +71,7 @@ vi操作逻辑
 #### 使用FinalShell登录服务器
 为什么要使用Finalshell，因为vi实在太难用了。
 
-#### 更改网卡地址
+#### 更改网卡地址（如果安装时没有改网卡地址可以用这个方法）
 1 - 配置文件地址：/etc/netplan/00-installer-config.yaml
 以下的要修改的配置文件
 ```bash
