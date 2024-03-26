@@ -155,7 +155,8 @@ sudo service mysql status
 
 ```bash
 #打开配置文件目录
-cd /etc/mysql/my.cnf
+cd /etc/mysql 打开这个目录下的 my.cnf
+
 
 #编辑配置文件
 my.cnf
