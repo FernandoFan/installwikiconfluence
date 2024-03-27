@@ -35,7 +35,7 @@
      1 设置boot分区：选择free speace > add gpt partition > size: 输入500m > format：xfs > mount /boot > create
      boot引导分区通常用于存放引导加载程序和相关的引导文件
      
-     2 设置swap分区：选择free speace > add gpt partition > size:8G(内存的两倍) > create
+     2 设置swap分区：选择free speace > add gpt partition > size:8G(内存的两倍) > format:swap > create
      Swap 分区用于当物理内存不足时，作为虚拟内存的一部分，用于交换出内存中暂时不活跃的数据
      
      创建root分区：选择free speace > add gpt partition > size:留空把剩余空间都给他> format：xfs > mount / > create
