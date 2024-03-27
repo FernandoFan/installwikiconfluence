@@ -1,5 +1,5 @@
 # TrueNAS上使用Ubuntu安装Confluence
-
+配套视频地址：https://www.bilibili.com/video/BV1mx421S7RK/?vd_source=c9dd26518e4b62955a95cea0fa155758
 ## 配置要求
 
   Server Hardware Requirements Guide：https://confluence.atlassian.com/conf85/server-hardware-requirements-guide-1283361319.html
