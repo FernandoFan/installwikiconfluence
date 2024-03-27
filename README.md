@@ -63,7 +63,7 @@ sudo passwd root
 ```bash
 vi /etc/ssh/sshd_config
 ```
-你需要：配置文件里面的注释 PermitRootLogin和PasswordAuthentication前面的#并把参数改成yes 
+你需要去掉配置文件里面 PermitRootLogin和PasswordAuthentication前面的# 并把参数改成yes 
 
 vi操作逻辑
 输入i 插入模式，只能输入文字，在i模式里按esc退回命令行模式 删除文字，在命令行模式下按：输入 wq 就可以保存
